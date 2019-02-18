@@ -42,7 +42,11 @@ let getJSON = function (options, onResult) {
 };
 
 let getJSONSync = function (url) {
-    let res = request('GET', url);
+    var res = request('GET', url, {
+        headers: {
+            "X-Requested-With": "XMLHttpRequest"
+        }
+    });
     let output = res.getBody('utf8');
     if (output.charCodeAt(0) === 0xFEFF) {
         output = output.substr(1);  // remove BOM
